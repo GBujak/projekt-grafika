@@ -1,6 +1,7 @@
 project('projekt grafika', 'cpp',
     version: '0.0.1',
-    license: 'GPLv3')
+    license: 'GPLv3',
+    default_options: ['cpp_std=c++17'])
 
 allegro_dep = dependency('allegro-5')
 allegro_primitives_dep = dependency('allegro_primitives-5')
