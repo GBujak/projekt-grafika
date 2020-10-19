@@ -1,7 +1,8 @@
 #include <iostream>
 #include <test.hpp>
-#include <allegro5/allegro.h>
+#include <allegro5/allegro5.h>
 #include <allegro5/allegro_primitives.h>
+
 
 int main() {
     std::cout << "Hello world!" << std::endl;
