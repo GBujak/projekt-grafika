@@ -1,2 +1,4 @@
 /builddir/
 .vscode
+.clangd
+/compile_commands.json
