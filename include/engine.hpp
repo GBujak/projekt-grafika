@@ -21,8 +21,10 @@ class Engine {
     // End of singleton implementation
 
     private:
+    bool should_exit;
     std::optional<Logger> m_logger;
 
     public:
+    void main_loop();
     const Logger& logger() const;
 };

@@ -3,4 +3,5 @@ src_files = files([
     'display.cpp',
     'engine.cpp',
     'logger.cpp',
+    'clock.cpp',
 ])

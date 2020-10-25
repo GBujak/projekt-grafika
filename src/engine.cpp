@@ -15,6 +15,12 @@ Engine::~Engine() {
     m_logger.reset();
 }
 
+void Engine::main_loop() {
+    while (!should_exit) {
+
+    }
+}
+
 const Logger& Engine::logger() const {
     return *m_logger;
 }
