@@ -17,3 +17,10 @@ Clock::Clock(int fps_limit = 0) {
     }
     this->time_point = std::chrono::system_clock::now();
 }
+
+unsigned Clock::elapsed_animation_ticks(const TimePoint& start, unsigned animation_frequency) {
+    // cast duration to milliseconds
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(this->time_point - start);
+    // divide by the time a single tick of animation takes
+    return duration.count() / animation_frequency;
+}

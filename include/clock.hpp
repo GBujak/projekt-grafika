@@ -14,5 +14,9 @@ class Clock {
     public:
     Clock(int fps_limit); 
 
-    const TimePoint& next(); 
+    const TimePoint& next();
+
+    // Returns elapsed ticks of animation that started at 'start' and
+    // has a tick frequency of 'animation_frequency' in 1/millisecond
+    unsigned elapsed_animation_ticks(const TimePoint& start, unsigned animation_frequency);
 };
