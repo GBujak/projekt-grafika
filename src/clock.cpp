@@ -1,13 +1,12 @@
 #include <clock.hpp>
 
-const TimePoint& Clock::next() {
+void Clock::tick() {
     if (this->fps_limit) {
         this->time_point += std::chrono::milliseconds(min_frame_time);
         std::this_thread::sleep_until(this->time_point);
     } else {
         this->time_point = std::chrono::system_clock::now();
     }
-    return time_point;
 }
 
 Clock::Clock(int fps_limit = 0) {

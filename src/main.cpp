@@ -11,7 +11,7 @@ int main() {
     long current_time = time(nullptr);
     int same_time_count = 0;
     while (true) {
-        clock.next();
+        clock.tick();
         if (time(nullptr) == current_time) same_time_count++;
         else {
             std::cout << same_time_count << std::endl;

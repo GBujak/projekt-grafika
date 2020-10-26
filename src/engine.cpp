@@ -19,17 +19,11 @@ Engine::~Engine() {
 }
 
 void Engine::main_loop() {
+    al_get_keyboard_state(&this->m_keyboard_state);
+    this->m_clock->tick();
     while (!should_exit) {
 
     }
-}
-
-const Logger& Engine::logger() const {
-    return *m_logger;
-}
-
-const Clock& Engine::clock() const {
-    return *m_clock;
 }
 
 // Replace clock with a clock that limits fps
