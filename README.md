@@ -6,7 +6,7 @@ Projekt używa <https://mesonbuild.com> do kompilacji.
 
 * biblioteka `allegro-5`
 * python3 + meson
-* ninja
+* kompilator C++ 17
 
 ### Kompilacja
 
