@@ -8,6 +8,9 @@ Engine::Engine() {
     al_init();
     al_install_keyboard();
     m_logger.emplace();
+
+    // Don't limit fps by default
+    m_clock.emplace(0);
 }
 
 Engine::~Engine() {
@@ -23,4 +26,14 @@ void Engine::main_loop() {
 
 const Logger& Engine::logger() const {
     return *m_logger;
+}
+
+const Clock& Engine::clock() const {
+    return *m_clock;
+}
+
+// Replace clock with a clock that limits fps
+void Engine::set_clock_fps_limit(int limit) {
+    m_clock.reset();
+    m_clock.emplace(limit);
 }
