@@ -4,9 +4,9 @@ Projekt używa <https://mesonbuild.com> do kompilacji.
 
 ### Wymagania:
 
-* biblioteka `allegro-5`
+* biblioteka `sdl2`
 * python3 + meson
-* kompilator C++ 17
+* kompilator C++17
 
 ### Kompilacja
 
