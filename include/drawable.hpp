@@ -1,11 +1,11 @@
 #pragma once
 
-#include <allegro5/allegro5.h>
+#include <SDL2/SDL.h>
 
 namespace graphics {
     class Drawable {
         public:
-        virtual void draw(ALLEGRO_DISPLAY* const display) const;
+        virtual void draw(double* const display) const;
         virtual ~Drawable();
     };
 }

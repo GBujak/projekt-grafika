@@ -1,7 +1,5 @@
 #include <iostream>
 #include <test.hpp>
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_primitives.h>
 
 #include <clock.hpp>
 #include <time.h>

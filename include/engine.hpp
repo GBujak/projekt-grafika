@@ -3,7 +3,7 @@
 #include <logger.hpp>
 #include <clock.hpp>
 
-#include <allegro5/allegro.h>
+#include <SDL2/SDL.h>
 #include <iostream>
 #include <optional>
 
@@ -27,12 +27,12 @@ class Engine {
     bool should_exit;
     std::optional<Logger> m_logger;
     std::optional<Clock> m_clock;
-    ALLEGRO_KEYBOARD_STATE m_keyboard_state;
+    // ALLEGRO_KEYBOARD_STATE m_keyboard_state;
 
     public:
     void main_loop();
     const Logger& logger() const { return *m_logger; };
     const Clock& clock() const { return *m_clock; };
     void set_clock_fps_limit(int limit);
-    const ALLEGRO_KEYBOARD_STATE& keyboard_state() const { return m_keyboard_state; }
+    // const ALLEGRO_KEYBOARD_STATE& keyboard_state() const { return m_keyboard_state; }
 };

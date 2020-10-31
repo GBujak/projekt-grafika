@@ -1,12 +1,9 @@
 #include <engine.hpp>
 #include <logger.hpp>
 
-#include <allegro5/allegro5.h>
-#include <allegro5/allegro_native_dialog.h>
-
 Engine::Engine() {
-    al_init();
-    al_install_keyboard();
+    // al_init();
+    // al_install_keyboard();
     m_logger.emplace();
 
     // Don't limit fps by default
@@ -14,12 +11,12 @@ Engine::Engine() {
 }
 
 Engine::~Engine() {
-    al_uninstall_keyboard();
+    // al_uninstall_keyboard();
     m_logger.reset();
 }
 
 void Engine::main_loop() {
-    al_get_keyboard_state(&this->m_keyboard_state);
+    // al_get_keyboard_state(&this->m_keyboard_state);
     this->m_clock->tick();
     while (!should_exit) {
 

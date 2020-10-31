@@ -1,14 +1,15 @@
 #pragma once
 
-#include <allegro5/allegro5.h>
+#include <SDL2/SDL.h>
 #include <drawable.hpp>
 
 namespace graphics {
     class Display {
-        ALLEGRO_DISPLAY* display;
+        SDL_Window* window;
+        SDL_Renderer* renderer;
 
         public:
-        Display(int width, int height); 
+        Display(); 
         void draw(const Drawable* drawable);
     };
 }
