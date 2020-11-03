@@ -5,4 +5,4 @@
 
 #include <error.hpp>
 
-std::optional<Error> main_loop(SDL_Window* window);
+std::optional<Error> main_loop(SDL_Window* window, int fps_limit);
