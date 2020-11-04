@@ -13,9 +13,16 @@ int main() {
         exit(1);
     }
 
-    auto window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_OPENGL);
+    auto window = SDL_CreateWindow(
+            WINDOW_TITLE,
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            640,
+            480,
+            SDL_WINDOW_OPENGL
+    );
 
-    auto result = main_loop(window, 60);
+    std::optional<Error> result = main_loop(window, 60);
 
     if (result.has_value()) {
         std::cerr << "Error in main loop" << std::endl;
