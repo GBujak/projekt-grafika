@@ -10,11 +10,11 @@ class Tile {
     };
 
     private:
-    unsigned m_door_room_id = 0;
+    int m_door_room_id = -1;
     Type m_type = Type::Wall;
 
     public:
-    Tile(Type type, unsigned door_room_id = 0)
+    Tile(Type type, int door_room_id = -1)
         : m_type(type), m_door_room_id(door_room_id) {}
 
     Type type() const { return m_type; }
