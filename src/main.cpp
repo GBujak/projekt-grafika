@@ -1,4 +1,3 @@
-#include "SDL_video.h"
 #include <cstdlib>
 #include <iostream>
 
