@@ -1,10 +1,9 @@
 #pragma once
 
-namespace geometry {
-    struct Vector2d {
-        float x, y;
-    };
-    struct Line {
-        Vector2d a, b;
-    };
-}
+struct Point2f {
+    float x, y;
+};
+
+struct Line {
+    Point2f a, b;
+};

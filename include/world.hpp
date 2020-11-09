@@ -10,5 +10,6 @@ class World {
     int m_current_room = -1;
 
     public:
-    Matrix<Tile>& current_room() const;
+    World();
+    auto current_room() -> Matrix<Tile>*;
 };

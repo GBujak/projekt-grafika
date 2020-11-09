@@ -10,8 +10,8 @@ class Tile {
     };
 
     private:
-    int m_door_room_id = -1;
-    Type m_type = Type::Wall;
+    Type m_type;
+    int m_door_room_id;
 
     public:
     Tile(Type type, int door_room_id = -1)
