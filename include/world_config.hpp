@@ -4,8 +4,10 @@
 #include <matrix.hpp>
 #include <tile.hpp>
 #include <geometry.hpp>
+#include <floor.hpp>
 
 struct WorldConfig {
-    Matrix<Tile> floor;
+    Floor floor;
     Point2f player_start;
+    WorldConfig() : floor(0, 0) {};
 };

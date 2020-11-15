@@ -12,5 +12,5 @@ class Camera {
     Camera(Point2f raw_screen_size);
     auto resize_screen(Point2f raw_screen_size);
 
-    auto draw(SDL_Renderer* renderer, World world, InputState input_state);
+    auto draw(SDL_Renderer* renderer, World world, InputState input_state) -> void;
 };
