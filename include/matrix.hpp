@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 template <typename T>
 class Matrix {
@@ -9,8 +10,16 @@ class Matrix {
 
     public:
     Matrix(unsigned dimx, unsigned dimy)
-        : m_dimx(dimx), m_dimy(dimy) {
+            : m_dimx(dimx), m_dimy(dimy) {
         inner.resize(m_dimx * m_dimy);
+    }
+
+    Matrix(std::vector<T> vector, unsigned dimx, unsigned dimy)
+            : inner(vector), m_dimx(dimx), m_dimy(dimy) {
+        if (inner.size() != m_dimx * m_dimy) {
+            std::cerr << "Bad matrix dimensions" << std::endl;
+            abort();
+        }
     }
 
     unsigned dimx() const { return m_dimx; }

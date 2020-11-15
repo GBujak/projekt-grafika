@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL2/SDL.h>
+
 class Tile {
     public:
     enum class Type {
@@ -11,9 +13,10 @@ class Tile {
 
     private:
     Type m_type;
-    int m_door_room_id;
+    Uint8 m_door_room_id;
 
     public:
+    Tile() : m_type(Type::Space), m_door_room_id(-1) {}
     Tile(Type type, int door_room_id = -1)
         : m_type(type), m_door_room_id(door_room_id) {}
 

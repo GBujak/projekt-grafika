@@ -1,12 +1,14 @@
 #include <SDL2/SDL.h>
 #include <drawing_functions.hpp>
 #include <tile.hpp>
+#include <consts.hpp>
 
-void draw(SDL_Renderer* renderer, const Tile& tile, int h, int w, int x, int y) {
+// Draw map tile
+void draw_tile(SDL_Renderer* renderer, const Tile& tile, int x, int y) {
     SDL_Rect rect;
 
-    rect.h = h;
-    rect.w = w;
+    rect.h = TILE_WIDTH;
+    rect.w = TILE_WIDTH;
     rect.x = x;
     rect.y = y;
 

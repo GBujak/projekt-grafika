@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <core_functions.hpp>
+#include <input_state.hpp>
 #include <error.hpp>
 
 auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
@@ -15,8 +16,9 @@ auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
 auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
     bool should_exit = false;
     SDL_Event event;
-    const Uint8* keyboard_state = nullptr;
     auto last_tick = SDL_GetTicks();
+
+    auto input_state = InputState::next();
 
     while (!should_exit) {
         // Handle events
@@ -24,7 +26,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
             if (event.type == SDL_QUIT) should_exit = true;
         }
 
-        keyboard_state = SDL_GetKeyboardState(nullptr);
+        input_state = InputState::next();
 
         // Limit fps
         last_tick = delay_at_fps(last_tick, fps_limit);
