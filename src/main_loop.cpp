@@ -50,6 +50,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         input_state = InputState::next();
 
         world.player().update(&input_state, last_tick);
+        world.update(last_tick);
         camera.draw(renderer, world, input_state);
 
         SDL_RenderPresent(renderer);

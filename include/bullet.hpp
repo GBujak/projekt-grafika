@@ -5,9 +5,10 @@
 
 class Bullet {
     Point2f position, velocity;
+    unsigned last_tick;
 
     public:
-    Bullet(Point2f position, Point2f velocity);
+    Bullet(Point2f position, Point2f velocity, unsigned tick);
     auto update(unsigned tick) -> void;
     auto draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f screen_resolution) -> void;
 };

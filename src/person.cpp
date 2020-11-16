@@ -35,6 +35,8 @@ auto Person::update(const InputState* input_state, Uint32 tick) -> void {
     m_position.y += m_speed.y;
 
     m_last_acceleration_tick = tick;
+
+    if (input_state->mouse_state == 1 && weapon.has_value()) weapon->try_shoot(m_position, {1.0, 1.0}, tick);
 }
 
 void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {
@@ -51,4 +53,8 @@ void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {
 
 auto Person::position() -> Point2f {
     return m_position;
+}
+
+auto Person::give_weapon(Weapon weapon) -> void {
+    this->weapon = { weapon };
 }

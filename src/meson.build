@@ -7,4 +7,6 @@ src_files = files([
     'camera_utils.cpp',
     'person.cpp',
     'floor.cpp',
+    'weapon.cpp',
+    'bullet.cpp',
 ])

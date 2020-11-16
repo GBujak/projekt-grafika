@@ -1,9 +1,21 @@
 #include <weapon.hpp>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
+
+#include <iostream>
 
 Weapon::Weapon(unsigned bullet_per_shot, unsigned bullet_velocity,
-    unsigned recovery_time, unsigned innacuracy_time, unsigned base_spread)
+    unsigned recovery_time, unsigned innacuracy_time, unsigned base_spread,
+    std::vector<Bullet>* bullet_store)
     : bullet_per_shot(bullet_per_shot), bullet_velocity(bullet_velocity),
     recovery_time(recovery_time), inaccuracy_time(innacuracy_time),
-    base_spread(base_spread), last_shot(SDL_GetTicks()) {}
+    base_spread(base_spread), last_shot(SDL_GetTicks()), bullet_store(bullet_store) {}
 
+auto Weapon::try_shoot(Point2f position, Point2f aim_vector, unsigned tick) -> void {
+    for (unsigned i = 0; i < bullet_per_shot; i++) {
+        auto velocity_vector = position;
+        velocity_vector.x *= bullet_velocity;
+        velocity_vector.y *= bullet_velocity;
+        auto bullet = Bullet {position, velocity_vector, tick};
+        bullet_store->push_back(bullet);
+    }
+}

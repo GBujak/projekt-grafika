@@ -22,4 +22,5 @@ auto Camera::draw(SDL_Renderer* renderer, World world, InputState input_state) -
     auto player = world.player();
     world.current_room()->draw(renderer, camera_pos, m_screen_size);
     player.draw(renderer, camera_pos);
+    world.draw(renderer, camera_pos, m_screen_size);
 }
