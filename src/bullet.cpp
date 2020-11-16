@@ -22,8 +22,6 @@ auto Bullet::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f screen_res
     rect.w = 10;
     rect.h = 10;
 
-    std::cout << "drawing bullet at x " << rect.x << " y " << rect.y << std::endl;
-
     SDL_SetRenderDrawColor(renderer, 200, 0, 0, 255);
     SDL_RenderFillRect(renderer, &rect);
 }
