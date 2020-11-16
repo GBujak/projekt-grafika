@@ -9,4 +9,5 @@ constexpr unsigned PERSON_WIDTH = 64;
 
 constexpr Uint32 ACCELERATION_UNIT = 1000; // W ile milisekund prędkość wyniesie prędkość + przyspieszenie
 
-constexpr float PERSON_ACCELERATION = 100;
+constexpr float PERSON_ACCELERATION = 0.5;
+constexpr float PERSON_MAX_VELOCITY = 0.0075;

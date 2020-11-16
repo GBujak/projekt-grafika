@@ -1,6 +1,7 @@
 #include <person.hpp>
 #include <consts.hpp>
 #include <iostream>
+#include <algorithm>
 
 Person::Person(Point2f position)
     : m_position(position), m_last_acceleration_tick(SDL_GetTicks()) {}
@@ -17,15 +18,21 @@ auto Person::update(const InputState* input_state, Uint32 tick) -> void {
 
     // Ruszanie się po przekątnej nie powinno być szybsze, niż w linii prostej
     if (x_movement != 0.0 && y_movement != 0.0) {
-        x_movement /= sqrtf(2.0);
-        y_movement /= sqrtf(2.0);
+        x_movement /= std::sqrt(2.0);
+        y_movement /= std::sqrt(2.0);
     }
 
     float x_delta_v = (x_movement * (float) PERSON_ACCELERATION) / (float) (ACCELERATION_UNIT * tick_diff);
     float y_delta_v = (y_movement * (float) PERSON_ACCELERATION) / (float) (ACCELERATION_UNIT * tick_diff);
 
-    m_position.x += x_delta_v;
-    m_position.y += y_delta_v;
+    m_speed.x *= 0.9;
+    m_speed.y *= 0.9;
+
+    m_speed.x = std::clamp(m_speed.x + x_delta_v, -PERSON_MAX_VELOCITY, PERSON_MAX_VELOCITY);
+    m_speed.y = std::clamp(m_speed.y + y_delta_v, -PERSON_MAX_VELOCITY, PERSON_MAX_VELOCITY);
+
+    m_position.x += m_speed.x;
+    m_position.y += m_speed.y;
 
     m_last_acceleration_tick = tick;
 }

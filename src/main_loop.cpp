@@ -55,7 +55,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         SDL_RenderPresent(renderer);
 
         // Limit fps
-        last_tick = delay_at_fps(last_tick, fps_limit);
+        last_tick = delay_at_fps(last_tick, -1);
     }
 
     SDL_DestroyRenderer(renderer);
