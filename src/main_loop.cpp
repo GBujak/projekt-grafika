@@ -47,13 +47,12 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+        input_state = InputState::next();
 
         world.player().update(&input_state, last_tick);
         camera.draw(renderer, world, input_state);
 
         SDL_RenderPresent(renderer);
-
-        input_state = InputState::next();
 
         // Limit fps
         last_tick = delay_at_fps(last_tick, fps_limit);

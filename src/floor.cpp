@@ -14,8 +14,8 @@ auto Floor::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution)
     unsigned start_x, start_y, end_x, end_y;
     start_x = std::max(0, (int) std::floor(camera_pos.x));
     start_y = std::max(0, (int) std::floor(camera_pos.y));
-    end_x   = std::min(m_matrix.dimx(), (unsigned) std::floor(camera_pos.x + resolution.x));
-    end_y   = std::min(m_matrix.dimy(), (unsigned) std::floor(camera_pos.y + resolution.y));
+    end_x   = std::min(m_matrix.dimx(), (unsigned) std::floor(camera_pos.x + resolution.x + 1));
+    end_y   = std::min(m_matrix.dimy(), (unsigned) std::floor(camera_pos.y + resolution.y + 1));
 
     for (unsigned x = start_x; x < end_x; x++) {
         for (unsigned y = start_y; y < end_y; y++) {

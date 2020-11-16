@@ -4,7 +4,10 @@
 #include <cmath>
 
 auto camera_position(Point2f player_position, Point2f cursor_position) -> Point2f {
-    return player_position; // Todo: kamera pomiędzy graczem a kursorem
+    return {
+        player_position.x + PERSON_WIDTH / 2,
+        player_position.y + PERSON_WIDTH / 2,
+    }; // Todo: kamera pomiędzy graczem a kursorem
 }
 
 auto matrix_to_absolute(Point2f matrix_pos) -> Point2f {

@@ -30,5 +30,5 @@ void draw_tile(SDL_Renderer* renderer, const Tile& tile, int x, int y) {
             break;
     }
 
-    SDL_RenderDrawRect(renderer, &rect);
+    SDL_RenderFillRect(renderer, &rect);
 }
