@@ -6,7 +6,7 @@
 Person::Person(Point2f position)
     : m_position(position), m_last_acceleration_tick(SDL_GetTicks()) {}
 
-auto Person::update(const InputState* input_state, Uint32 tick) -> void {
+auto Person::update(const InputState* input_state, Point2f aim_vector, Uint32 tick) -> void {
     auto tick_diff = tick - m_last_acceleration_tick;
     if (tick_diff == 0) return;
 
@@ -36,7 +36,7 @@ auto Person::update(const InputState* input_state, Uint32 tick) -> void {
 
     m_last_acceleration_tick = tick;
 
-    if (input_state->mouse_state == 1 && weapon.has_value()) weapon->try_shoot(m_position, {1.0, 1.0}, tick);
+    if (input_state->mouse_state == 1 && weapon.has_value()) weapon->try_shoot(m_position, aim_vector, tick);
 }
 
 void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {

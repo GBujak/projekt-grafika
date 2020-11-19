@@ -20,7 +20,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
 
     WorldConfig test;
     test.floor = {{
-        {Tile::Type::Wall}, {}, {}, {}, {},
+        {Tile::Type::Wall}, {}, {}, {}, {Tile::Type::Window},
         {}, {}, {}, {}, {},
         {}, {}, {}, {}, {},
         {Tile::Type::Wall}, {}, {}, {}, {}, 
@@ -49,7 +49,8 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         SDL_RenderClear(renderer);
         input_state = InputState::next();
 
-        world.player().update(&input_state, last_tick);
+        auto aim_vec = get_aim_vector(input_state.mouse_position, world.player().position(), {1280, 720});
+        world.player().update(&input_state, aim_vec, last_tick);
         world.update(last_tick);
         camera.draw(renderer, world, input_state);
 
