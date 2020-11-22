@@ -15,8 +15,8 @@ auto Camera::draw(SDL_Renderer* renderer, World world, InputState input_state) -
     // auto camera_pos = camera_position(world.player().position(), input_state.mouse_position, m_screen_size);
     auto aim_vector = get_aim_vector(input_state.mouse_position, m_screen_size);
     // auto camera_pos = world.player().position();
-    std::cout << aim_vector.x << " " << aim_vector.y << std::endl;
     auto camera_pos = camera_position(world.player().position(), m_screen_size, aim_vector);
+    std::cout << camera_pos.x << " " << camera_pos.y << std::endl;
 
     auto player = world.player();
     world.current_room()->draw(renderer, camera_pos, m_screen_size);

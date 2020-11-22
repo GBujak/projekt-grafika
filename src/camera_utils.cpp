@@ -5,16 +5,11 @@
 
 auto camera_position(Point2f player_position, Point2f screen_resolution, Point2f aim_vector) -> Point2f {
     auto camera_pos = player_position;
-
-    // Wyśrodkuj kamerę na graczu
-    camera_pos.x -= screen_resolution.x / 2;
-    camera_pos.y -= screen_resolution.y / 2;
-    camera_pos.add_scalar((float) PERSON_WIDTH / TILE_WIDTH / 2);
-
-    // Przesuń do połowy odcinka pomiędzy graczem a kursorem
-    camera_pos.x = (camera_pos.x + aim_vector.x) / 2;
-    camera_pos.y = (camera_pos.y + aim_vector.y) / 2;
-
+    camera_pos.add_scalar(((float) PERSON_WIDTH / TILE_WIDTH) / 2);
+    screen_resolution.div_scalar(2);
+    camera_pos.sub_point2f(screen_resolution);
+    aim_vector.mul_scalar(0.5);
+    camera_pos.add_point2f(aim_vector);
     return camera_pos;
 }
 

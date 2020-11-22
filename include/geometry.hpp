@@ -34,6 +34,16 @@ struct Point2f {
         x *= other.x;
         y *= other.y;
     }
+
+    auto add_point2f(Point2f other) -> void {
+        x += other.x;
+        y += other.y;
+    }
+
+    auto sub_point2f(Point2f other) -> void {
+        x -= other.x;
+        y -= other.y;
+    }
 };
 
 struct Line {
