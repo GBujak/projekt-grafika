@@ -5,7 +5,7 @@
 
 auto camera_position(Point2f player_position, Point2f screen_resolution, Point2f aim_vector) -> Point2f {
     auto camera_pos = player_position;
-    camera_pos.add_scalar(((float) PERSON_WIDTH / TILE_WIDTH) / 2);
+    camera_pos.add_scalar(PERSON_WIDTH / 2);
     screen_resolution.div_scalar(2);
     camera_pos.sub_point2f(screen_resolution);
     aim_vector.mul_scalar(0.5);

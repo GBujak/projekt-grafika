@@ -43,8 +43,8 @@ void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {
     auto rect = SDL_Rect{};
     rect.x = (m_position.x - camera_pos.x) * TILE_WIDTH;
     rect.y = (m_position.y - camera_pos.y) * TILE_WIDTH;
-    rect.w = PERSON_WIDTH;
-    rect.h = PERSON_WIDTH;
+    rect.w = PERSON_WIDTH * TILE_WIDTH;
+    rect.h = PERSON_WIDTH * TILE_WIDTH;
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 

@@ -4,8 +4,8 @@
 
 Bullet::Bullet(Point2f position, Point2f velocity, unsigned tick)
     : position(position), velocity(velocity), last_tick(tick) {
-        this->position.x += (float)PERSON_WIDTH / (TILE_WIDTH*2);
-        this->position.y += (float)PERSON_WIDTH / (TILE_WIDTH*2);
+        this->position.x += PERSON_WIDTH / 2;
+        this->position.y += PERSON_WIDTH / 2;
     }
 
 auto Bullet::update(unsigned tick) -> void {
