@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <geometry.hpp>
-#include <person.hpp>
+#include <player.hpp>
 #include <world.hpp>
 
 class Camera {

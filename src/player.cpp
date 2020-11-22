@@ -1,12 +1,12 @@
-#include <person.hpp>
+#include <player.hpp>
 #include <consts.hpp>
 #include <iostream>
 #include <algorithm>
 
-Person::Person(Point2f position)
+Player::Player(Point2f position)
     : m_position(position), m_last_acceleration_tick(SDL_GetTicks()) {}
 
-auto Person::update(const InputState* input_state, Point2f aim_vector, Uint32 tick) -> void {
+auto Player::update(const InputState* input_state, Point2f aim_vector, Uint32 tick) -> void {
     auto tick_diff = tick - m_last_acceleration_tick;
     if (tick_diff == 0) return;
 
@@ -39,7 +39,7 @@ auto Person::update(const InputState* input_state, Point2f aim_vector, Uint32 ti
     if (input_state->mouse_state == 1 && weapon.has_value()) weapon->try_shoot(m_position, aim_vector, tick);
 }
 
-void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {
+void Player::draw(SDL_Renderer* renderer, Point2f camera_pos) {
     auto rect = SDL_Rect{};
     rect.x = (m_position.x - camera_pos.x) * TILE_WIDTH;
     rect.y = (m_position.y - camera_pos.y) * TILE_WIDTH;
@@ -51,10 +51,10 @@ void Person::draw(SDL_Renderer* renderer, Point2f camera_pos) {
     SDL_RenderFillRect(renderer, &rect);
 }
 
-auto Person::position() -> Point2f {
+auto Player::position() -> Point2f {
     return m_position;
 }
 
-auto Person::give_weapon(Weapon weapon) -> void {
+auto Player::give_weapon(Weapon weapon) -> void {
     this->weapon = { weapon };
 }

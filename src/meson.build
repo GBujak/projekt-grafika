@@ -5,7 +5,7 @@ src_files = files([
     'world.cpp',
     'camera.cpp',
     'camera_utils.cpp',
-    'person.cpp',
+    'player.cpp',
     'floor.cpp',
     'weapon.cpp',
     'bullet.cpp',
