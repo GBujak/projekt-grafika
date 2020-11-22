@@ -9,8 +9,7 @@ auto camera_position(Point2f player_position, Point2f screen_resolution, Point2f
     // Wyśrodkuj kamerę na graczu
     camera_pos.x -= screen_resolution.x / 2;
     camera_pos.y -= screen_resolution.y / 2;
-    camera_pos.x += (float) PERSON_WIDTH / TILE_WIDTH / 2;
-    camera_pos.y += (float) PERSON_WIDTH / TILE_WIDTH / 2;
+    camera_pos.add_scalar((float) PERSON_WIDTH / TILE_WIDTH / 2);
 
     // Przesuń do połowy odcinka pomiędzy graczem a kursorem
     camera_pos.x = (camera_pos.x + aim_vector.x) / 2;
@@ -19,10 +18,11 @@ auto camera_position(Point2f player_position, Point2f screen_resolution, Point2f
     return camera_pos;
 }
 
-auto get_aim_vector(Point2f raw_mouse_position, Point2f player_position, Point2f screen_resolution) -> Point2f {
+auto get_aim_vector(Point2f raw_mouse_position, Point2f screen_resolution) -> Point2f {
     auto vec = raw_mouse_position;
-    vec.x = ((vec.x / TILE_WIDTH) - screen_resolution.x + (float) PERSON_WIDTH / TILE_WIDTH) + player_position.x;
-    vec.y = ((vec.y / TILE_WIDTH) - screen_resolution.y + (float) PERSON_WIDTH / TILE_WIDTH) + player_position.y;
+    vec.x -= screen_resolution.x * (float) TILE_WIDTH / 2;
+    vec.y -= screen_resolution.y * (float) TILE_WIDTH / 2;
+    vec.div_scalar(TILE_WIDTH);
     return vec;
 }
 

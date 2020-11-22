@@ -5,6 +5,7 @@
 #include <world.hpp>
 #include <world_config.hpp>
 #include <camera.hpp>
+#include <consts.hpp>
 
 auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
     auto new_tick = SDL_GetTicks();
@@ -49,7 +50,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         SDL_RenderClear(renderer);
         input_state = InputState::next();
 
-        auto aim_vec = get_aim_vector(input_state.mouse_position, world.player().position(), {1280, 720});
+        auto aim_vec = get_aim_vector(input_state.mouse_position, {1280 / TILE_WIDTH, 720 / TILE_WIDTH});
         world.player().update(&input_state, aim_vec, last_tick);
         world.update(last_tick);
         camera.draw(renderer, world, input_state);

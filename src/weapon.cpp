@@ -11,10 +11,10 @@ Weapon::Weapon(unsigned bullet_per_shot, unsigned bullet_velocity,
     base_spread(base_spread), last_shot(SDL_GetTicks()), bullet_store(bullet_store) {}
 
 auto Weapon::try_shoot(Point2f position, Point2f aim_vector, unsigned tick) -> void {
+    aim_vector.normalize();
     for (unsigned i = 0; i < bullet_per_shot; i++) {
-        auto velocity_vector = position;
-        velocity_vector.x *= bullet_velocity;
-        velocity_vector.y *= bullet_velocity;
+        auto velocity_vector = aim_vector;
+        velocity_vector.mul_scalar(bullet_velocity);
         auto bullet = Bullet {position, velocity_vector, tick};
         bullet_store->push_back(bullet);
     }
