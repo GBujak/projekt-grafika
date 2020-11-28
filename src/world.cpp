@@ -9,7 +9,6 @@ World::World() {
 }
 
 World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0) {
-    auto weapon = Weapon {1, 1, 1, 1, 1, &bullets};
 }
 
 auto World::update(unsigned tick) -> void {

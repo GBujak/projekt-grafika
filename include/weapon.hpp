@@ -4,6 +4,7 @@
 
 #include <geometry.hpp>
 #include <bullet.hpp>
+#include <world.hpp>
 
 class Weapon {
     unsigned bullet_per_shot;
@@ -12,12 +13,12 @@ class Weapon {
     unsigned inaccuracy_time;
     unsigned base_spread;
     unsigned last_shot;
-    std::vector<Bullet>* bullet_store;
+    World& world;
 
     public: 
     Weapon(unsigned bullet_per_shot, unsigned bullet_velocity,
            unsigned recovery_time,   unsigned innacuracy_time,
-           unsigned base_spread,     std::vector<Bullet>* bullet_store);
+           unsigned base_spread,     World& world);
     
     auto try_shoot(Point2f position, Point2f aim_vector, unsigned tick) -> void;
 };

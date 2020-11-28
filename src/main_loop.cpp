@@ -8,6 +8,7 @@
 #include <consts.hpp>
 #include <renderer.hpp>
 
+// Nie działa, bo funkcja SDL_Delay() nie działa; trzeba zmienić na std::chrono...
 auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
     auto new_tick = SDL_GetTicks();
     if (fps < 0) return new_tick;
@@ -19,7 +20,6 @@ auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
 }
 
 auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
-
     WorldConfig test;
     test.floor = {{
         {Tile::Type::Wall}, {}, {}, {}, {Tile::Type::Window},
@@ -29,8 +29,10 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         {}, {}, {}, {}, {},
     }, 5, 5};
 
-    World world {test};
-    Player player {{2, 2}};
+    World world{test};
+    auto test_weapon = Weapon{1, 10, 200, 0, 0, world};
+    Player player{{2, 2}};
+    player.give_weapon(&test_weapon);
 
     bool should_exit = false;
     SDL_Event event;
@@ -38,11 +40,9 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
     auto sdl_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     Renderer renderer{sdl_renderer, {1280, 720}};
-
     auto input_state = InputState::next();
 
     while (!should_exit) {
-        // Handle events
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) should_exit = true;
         }

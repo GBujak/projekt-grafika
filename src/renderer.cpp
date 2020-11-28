@@ -45,6 +45,8 @@ auto Renderer::draw_player(Player& player) -> void {
 
 auto Renderer::draw_world(World& world) -> void {
     draw_floor(*world.current_room());
+    for (auto& bullet : world.get_bullets())
+        draw_bullet(bullet);
 }
 
 auto Renderer::draw_floor(Floor& floor) -> void {
@@ -69,17 +71,7 @@ auto Renderer::draw_floor(Floor& floor) -> void {
 }
 
 auto Renderer::draw_bullet(Bullet& bullet) -> void {
-    // auto rect = SDL_Rect {};
-    // auto camera_pos = m_camera.position();
     auto position = bullet.position();
-
-    // rect.x = (position.x - camera_pos.x) * TILE_WIDTH;
-    // rect.y = (position.y - camera_pos.y) * TILE_WIDTH;
-    // rect.w = 10;
-    // rect.h = 10;
-
-    // SDL_SetRenderDrawColor(m_renderer, 200, 0, 0, 255);
-    // SDL_RenderFillRect(m_renderer, &rect);
 
     SDL_Color color;
     color.r = 200;
@@ -87,6 +79,6 @@ auto Renderer::draw_bullet(Bullet& bullet) -> void {
     color.b = 0;
     color.a = 255;
 
-    PhysicsEntity entity{position, {}, 10};
+    PhysicsEntity entity{position, {}, 0.1};
     draw_physics_entity(entity, color);
 }
