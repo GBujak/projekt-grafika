@@ -15,5 +15,6 @@ class Floor {
     Floor(unsigned dimx, unsigned dimy);
     Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy);
 
+    auto tile_matrix() -> Matrix<Tile>& { return m_matrix; }
     auto draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void;
 };

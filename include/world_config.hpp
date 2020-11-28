@@ -8,6 +8,5 @@
 
 struct WorldConfig {
     Floor floor;
-    Point2f player_start;
     WorldConfig() : floor(0, 0) {};
 };

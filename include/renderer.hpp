@@ -4,6 +4,10 @@
 #include <geometry.hpp>
 #include <camera.hpp>
 
+#include <world.hpp>
+#include <player.hpp>
+#include <physics_entity.hpp>
+
 class Renderer {
     SDL_Renderer* m_renderer;
     Camera m_camera;
@@ -12,5 +16,15 @@ class Renderer {
     auto camera() -> Camera& { return m_camera; }
 
     Renderer(SDL_Renderer* renderer, Point2f raw_screen_size);
-    auto draw_rect(Line rect_params, SDL_Color color) -> void;
+
+    auto update(InputState& input_state, Point2f player_position) -> void;
+
+    auto clear() -> void;
+    auto present() -> void;
+
+    auto draw_physics_entity(PhysicsEntity& entity, SDL_Color color) -> void;
+    auto draw_world(World& world) -> void;
+    auto draw_floor(Floor& floor) -> void;
+    auto draw_bullet(Bullet& bullet) -> void;
+    auto draw_player(Player& player) -> void;
 };

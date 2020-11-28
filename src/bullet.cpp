@@ -3,22 +3,22 @@
 #include <iostream>
 
 Bullet::Bullet(Point2f position, Point2f velocity, unsigned tick)
-    : position(position), velocity(velocity), last_tick(tick) {
-        this->position.x += PERSON_WIDTH / 2;
-        this->position.y += PERSON_WIDTH / 2;
+    : m_position(position), m_velocity(velocity), last_tick(tick) {
+        this->m_position.x += PERSON_WIDTH / 2;
+        this->m_position.y += PERSON_WIDTH / 2;
     }
 
 auto Bullet::update(unsigned tick) -> void {
     auto tick_diff = tick - last_tick;
-    position.x += (velocity.x / ACCELERATION_UNIT) * tick_diff;
-    position.y += (velocity.y / ACCELERATION_UNIT) * tick_diff;
+    m_position.x += (m_velocity.x / ACCELERATION_UNIT) * tick_diff;
+    m_position.y += (m_velocity.y / ACCELERATION_UNIT) * tick_diff;
     last_tick = tick;
 }
 
 auto Bullet::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f screen_resolution) -> void {
     auto rect = SDL_Rect {};
-    rect.x = (position.x - camera_pos.x) * TILE_WIDTH;
-    rect.y = (position.y - camera_pos.y) * TILE_WIDTH;
+    rect.x = (m_position.x - camera_pos.x) * TILE_WIDTH;
+    rect.y = (m_position.y - camera_pos.y) * TILE_WIDTH;
     rect.w = 10;
     rect.h = 10;
 

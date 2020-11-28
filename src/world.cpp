@@ -5,12 +5,11 @@ auto World::current_room() -> Floor* {
     return &m_rooms.at(m_current_room);
 }
 
-World::World() : m_player({0, 0}) {
+World::World() {
 }
 
-World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0), m_player(config.player_start) {
+World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0) {
     auto weapon = Weapon {1, 1, 1, 1, 1, &bullets};
-    m_player.give_weapon(weapon);
 }
 
 auto World::update(unsigned tick) -> void {

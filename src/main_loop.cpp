@@ -6,6 +6,7 @@
 #include <world_config.hpp>
 #include <camera.hpp>
 #include <consts.hpp>
+#include <renderer.hpp>
 
 auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
     auto new_tick = SDL_GetTicks();
@@ -27,16 +28,16 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         {Tile::Type::Wall}, {}, {}, {}, {}, 
         {}, {}, {}, {}, {},
     }, 5, 5};
-    test.player_start = {0, 0};
 
     World world {test};
-
-    Camera camera {{1280, 720}};
+    Player player {{2, 2}};
 
     bool should_exit = false;
     SDL_Event event;
     auto last_tick = SDL_GetTicks();
-    auto renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    auto sdl_renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    Renderer renderer{sdl_renderer, {1280, 720}};
 
     auto input_state = InputState::next();
 
@@ -46,22 +47,21 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
             if (event.type == SDL_QUIT) should_exit = true;
         }
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+        renderer.clear();
         input_state = InputState::next();
+        renderer.update(input_state, player.position());
 
-        auto aim_vec = get_aim_vector(input_state.mouse_position, {1280 / TILE_WIDTH, 720 / TILE_WIDTH});
-        world.player().update(&input_state, aim_vec, last_tick);
+        player.update(&input_state, renderer.camera().aim_vector(), last_tick);
         world.update(last_tick);
-        camera.draw(renderer, world, input_state);
 
-        SDL_RenderPresent(renderer);
+        renderer.draw_world(world);
+        renderer.draw_player(player);
+        renderer.present();
 
         // Limit fps
         last_tick = delay_at_fps(last_tick, -1);
     }
 
-    SDL_DestroyRenderer(renderer);
-
+    SDL_DestroyRenderer(sdl_renderer);
     return {};
 }
