@@ -11,6 +11,6 @@ class Renderer {
     public:
     auto camera() -> Camera& { return m_camera; }
 
-    Renderer(SDL_Renderer* renderer);
-    auto draw_rect(Line rect_params, SDL_Color color);
+    Renderer(SDL_Renderer* renderer, Point2f raw_screen_size);
+    auto draw_rect(Line rect_params, SDL_Color color) -> void;
 };

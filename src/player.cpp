@@ -25,6 +25,7 @@ auto Player::update(const InputState* input_state, Point2f aim_vector, Uint32 ti
     float x_delta_v = (x_movement * (float) PERSON_ACCELERATION) / (float) (ACCELERATION_UNIT * tick_diff);
     float y_delta_v = (y_movement * (float) PERSON_ACCELERATION) / (float) (ACCELERATION_UNIT * tick_diff);
 
+    // Gracz sam zwalnia
     m_speed.x *= 0.9;
     m_speed.y *= 0.9;
 

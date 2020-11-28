@@ -9,4 +9,6 @@ src_files = files([
     'floor.cpp',
     'weapon.cpp',
     'bullet.cpp',
+    'renderer.cpp',
+    'physics_entity.cpp',
 ])
