@@ -22,12 +22,13 @@ auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
 auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
     WorldConfig test;
     test.floor = {{
-        {Tile::Type::Wall}, {}, {}, {}, {Tile::Type::Window},
-        {}, {}, {}, {}, {},
-        {}, {}, {}, {}, {},
-        {Tile::Type::Wall}, {}, {}, {}, {}, 
-        {}, {}, {}, {}, {},
-    }, 5, 5};
+        {}, {}, {}, {}, {}, {},
+        {Tile::Type::Wall}, {}, {}, {}, {Tile::Type::Window}, {},
+        {}, {}, {}, {}, {}, {},
+        {}, {}, {}, {Tile::Type::Wall}, {}, {},
+        {Tile::Type::Wall}, {}, {}, {}, {}, {},
+        {}, {}, {}, {}, {}, {},
+    }, 6, 6};
 
     World world{test};
     auto test_weapon = Weapon{1, 10, 200, 0, 0, world};
