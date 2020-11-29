@@ -26,3 +26,15 @@ auto Floor::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution)
         }
     }
 }
+
+auto Floor::does_collide(Point2f position, bool is_piercing) -> bool {
+    int x = std::floor(position.x);
+    int y = std::floor(position.y);
+    if (x < 0 || x >= (int) m_matrix.dimx() || y < 0 || y >= (int) m_matrix.dimy()) return true;
+
+    auto tile = m_matrix.at(x, y);
+    if (is_piercing && tile.type() == Tile::Type::Window) return false;
+    if (tile.type() == Tile::Type::Space) return false;
+
+    return true;
+}

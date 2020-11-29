@@ -19,4 +19,5 @@ class PhysicsEntity {
     auto width()    -> float&   { return m_width; }
 
     auto update(Uint32 current_tick) -> void;
+    auto next_tick_position(Uint32 tick) -> Point2f;
 };

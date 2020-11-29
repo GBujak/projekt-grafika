@@ -17,4 +17,5 @@ class Floor {
 
     auto tile_matrix() -> Matrix<Tile>& { return m_matrix; }
     auto draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void;
+    auto does_collide(Point2f position, bool is_piercing) -> bool;
 };
