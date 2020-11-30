@@ -32,7 +32,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
 
     World world{test};
     auto test_weapon = Weapon{1, 10, 200, 0, 0, world};
-    Player player{{2, 2}};
+    Player player{{2, 2}, world};
     player.give_weapon(&test_weapon);
 
     bool should_exit = false;

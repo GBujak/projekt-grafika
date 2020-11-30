@@ -46,14 +46,13 @@ auto World::simple_collision(Point2f position, float width, bool is_piercing) ->
 }
 
 auto World::vector_collision(Point2f position, Point2f next_position, float width, bool is_piercing) -> Point2f {
-    auto& room = *current_room();
     Point2f result;
-
-    if (room.does_collide({next_position.x, position.y}, is_piercing))
+    
+    if (simple_collision({next_position.x, position.y}, width, is_piercing))
         result.x = position.x;
     else result.x = next_position.x;
 
-    if (room.does_collide({position.x, next_position.y}, is_piercing))
+    if (simple_collision({position.x, next_position.y}, width, is_piercing))
         result.y = position.y;
     else result.y = next_position.y;
 
