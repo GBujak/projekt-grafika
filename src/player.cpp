@@ -32,9 +32,6 @@ auto Player::update(const InputState* input_state, Point2f aim_vector, Uint32 ti
     m_speed.x = std::clamp(m_speed.x + x_delta_v, -PERSON_MAX_VELOCITY, PERSON_MAX_VELOCITY);
     m_speed.y = std::clamp(m_speed.y + y_delta_v, -PERSON_MAX_VELOCITY, PERSON_MAX_VELOCITY);
 
-    // m_position.x += m_speed.x;
-    // m_position.y += m_speed.y;
-
     Point2f next_position = {m_position.x + m_speed.x, m_position.y + m_speed.y};
     
     next_position = m_world.vector_collision(m_position, next_position, PERSON_WIDTH, false);

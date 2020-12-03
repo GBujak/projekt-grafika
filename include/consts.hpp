@@ -4,7 +4,7 @@
 
 constexpr const char* WINDOW_TITLE = "Gra";
 
-constexpr float TILE_WIDTH = 128;
+constexpr float TILE_WIDTH = 64;
 constexpr float PERSON_WIDTH = 0.5;
 
 constexpr float ACCELERATION_UNIT = 1000; // W ile milisekund prędkość wyniesie prędkość + przyspieszenie
