@@ -8,8 +8,6 @@ author:
 - Grzegorz Bujak
 - Arkadiusz Markowski
 - gr. 3ID11A
-mainfont: Lato
-monofont: Ubuntu Mono
 toc: t
 ---
 
@@ -17,6 +15,14 @@ toc: t
 
 Tematem naszego projektu jest gra typu shooter 2D z widokiem z góry. Projekt korzysta
 z biblioteki SDL2.
+
+Kod projektu znajduje się na <https://github.com/gbujak/projekt-grafika>.
+
+\vspace{1cm}
+
+![Zdjęcie z działania gry](./img/gra.png){width=70%}
+
+\newpage
 
 # Świat
 
