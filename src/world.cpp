@@ -10,10 +10,17 @@ World::World() {
 }
 
 World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0) {
+    for (auto& room : m_rooms) {
+        for (auto position : room.initial_enemy_positions()) {
+            auto enemy = Enemy{ Weapon{1, 10, 50, 0, 0, bullet_system()}, position };
+            m_enemies.push_back(enemy);
+        }
+    }
 }
 
-auto World::update(unsigned tick) -> void {
-    for (unsigned i = 0; i < bullets.size(); i++) {
+auto World::update(unsigned tick, Point2f player_position) -> void {
+    for (unsigned i = 0; i < m_bullet_system.bullets().size(); i++) {
+        auto& bullets = m_bullet_system.bullets();
         auto& bullet = bullets.at(i);
         bullet.update(tick);
         if (simple_collision(bullet.position(), 10 / TILE_WIDTH, true)) {
@@ -22,12 +29,21 @@ auto World::update(unsigned tick) -> void {
             i--;
         }
     }
+
+    for (unsigned i = 0; i < m_enemies.size(); i++) {
+        auto& enemy = m_enemies.at(i);
+        enemy.update(tick, player_position, *current_room());
+        for (auto& bullet : m_bullet_system.bullets()) {
+            if (bullet.person_collision(enemy.position())) {
+                enemy = m_enemies.back();
+                m_enemies.pop_back();
+                i--;
+            }
+        }
+    }
 }
 
 auto World::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void {
-    for (auto& bullet: bullets) bullet.draw(
-        renderer, camera_pos, resolution
-    );
 }
 
 auto World::simple_collision(Point2f position, float width, bool is_piercing) -> bool {

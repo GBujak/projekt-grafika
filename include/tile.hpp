@@ -7,8 +7,8 @@ class Tile {
     enum class Type {
         Space,
         Wall,
-        Door,
         Window,
+        Door,
     };
 
     private:

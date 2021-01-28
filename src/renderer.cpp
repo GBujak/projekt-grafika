@@ -57,6 +57,8 @@ auto Renderer::draw_world(World& world) -> void {
     draw_floor(*world.current_room());
     for (auto& bullet : world.get_bullets())
         draw_bullet(bullet);
+    for (auto& enemy : world.enemies())
+        draw_enemy(enemy);
 }
 
 auto Renderer::draw_floor(Floor& floor) -> void {
@@ -90,5 +92,16 @@ auto Renderer::draw_bullet(Bullet& bullet) -> void {
     color.a = 255;
 
     PhysicsEntity entity{position, {}, 0.1};
+    draw_physics_entity(entity, color);
+}
+
+auto Renderer::draw_debug_point(Point2f& point) -> void {
+    SDL_Color color;
+    color.r = 0;
+    color.g = 200;
+    color.b = 0;
+    color.a = 255;
+
+    auto entity = PhysicsEntity{ point, {}, 0.1 };
     draw_physics_entity(entity, color);
 }

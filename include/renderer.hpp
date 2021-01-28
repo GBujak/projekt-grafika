@@ -29,4 +29,5 @@ class Renderer {
     auto draw_bullet(Bullet& bullet) -> void;
     auto draw_player(Player& player) -> void;
     auto draw_enemy(Enemy& enemy) -> void;
+    auto draw_debug_point(Point2f& point) -> void;
 };

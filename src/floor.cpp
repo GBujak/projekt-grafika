@@ -10,6 +10,15 @@ Floor::Floor(unsigned dimx, unsigned dimy)
 Floor::Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy)
     : m_matrix(vec, dimx, dimy) {}
 
+Floor::Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy, std::vector<Point2f> initial_enemy_positions)
+    : m_matrix(vec, dimx, dimy), m_initial_enemy_positions(initial_enemy_positions) {
+    
+    for (auto& position : m_initial_enemy_positions) {
+        position.add_scalar(0.5);
+        position.add_scalar(-(0.5 * PERSON_WIDTH));
+    }
+}
+
 auto Floor::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void {
     unsigned start_x, start_y, end_x, end_y;
     start_x = std::max(0, (int) std::floor(camera_pos.x));

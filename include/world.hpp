@@ -7,12 +7,14 @@
 #include <floor.hpp>
 #include <bullet.hpp>
 #include <physics_entity.hpp>
+#include <bullet_system.hpp>
+#include <enemy.hpp>
 
 class World {
     std::vector<Floor> m_rooms;
+    std::vector<Enemy> m_enemies;
     int m_current_room = -1;
-
-    std::vector<Bullet> bullets;
+    BulletSystem m_bullet_system;
 
     public:
     World();
@@ -20,12 +22,14 @@ class World {
     auto current_room() -> Floor*;
 
     auto add_bullet(Bullet b) -> void {
-        bullets.push_back(b);
+        m_bullet_system.add_bullet(b);
     }
 
-    auto get_bullets() -> std::vector<Bullet>& { return bullets; }
+    auto get_bullets() -> std::vector<Bullet>& { return m_bullet_system.bullets(); }
+    auto bullet_system() -> BulletSystem& { return m_bullet_system; }
+    auto enemies() -> std::vector<Enemy>& { return m_enemies; }
 
-    auto update(unsigned tick) -> void;
+    auto update(unsigned tick, Point2f player_position) -> void;
     auto draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void;
     
     // Czy position jest w ścianie?

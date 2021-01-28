@@ -51,9 +51,13 @@ struct Point2f {
 
     auto operator-(const Point2f& other) const {
         auto result = Point2f{};
-        result.x = other.x - this->x;
-        result.y = other.y - this->y;
+        result.x = this->x - other.x;
+        result.y = this->y - other.y;
         return result;
+    }
+
+    auto length() -> float {
+        return std::sqrt((x*x) + (y*y));
     }
 };
 

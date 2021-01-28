@@ -25,3 +25,8 @@ auto Bullet::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f screen_res
     SDL_SetRenderDrawColor(renderer, 200, 0, 0, 255);
     SDL_RenderFillRect(renderer, &rect);
 }
+
+auto Bullet::person_collision(Point2f person_position) -> bool {
+    return (person_position.x > m_position.x - PERSON_WIDTH && person_position.x < m_position.x + 0.1)
+        && (person_position.y > m_position.y - PERSON_WIDTH && person_position.y < m_position.y + 0.1);
+}
