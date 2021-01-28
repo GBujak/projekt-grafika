@@ -39,6 +39,13 @@ auto Renderer::draw_player(Player& player) -> void {
     color.g = 20;
     color.b = 200;
     color.a = 255;
+
+    if (player.is_dead()) {
+        color.r = 150;
+        color.g = 150;
+        color.b = 150;
+    }
+
     PhysicsEntity entity{player.position(), {}, PERSON_WIDTH};
     draw_physics_entity(entity, color);
 }

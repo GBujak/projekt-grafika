@@ -4,9 +4,17 @@
 #include <algorithm>
 
 Player::Player(Point2f position, World& world)
-    : m_position(position), m_last_acceleration_tick(SDL_GetTicks()), m_weapon(nullptr), m_world(world) {}
+    : m_position(world.reload_floor()), m_last_acceleration_tick(SDL_GetTicks()), m_weapon(nullptr), m_world(world), m_dead(false) {}
 
 auto Player::update(const InputState* input_state, Point2f aim_vector, Uint32 tick) -> void {
+    if (m_dead) {
+        if (input_state->keyboard_state[SDL_SCANCODE_R]) {
+            m_position = m_world.reload_floor();
+            m_speed.mul_scalar(0.0f);
+            m_dead = false;
+        } else return;
+    }    
+
     auto tick_diff = tick - m_last_acceleration_tick;
     if (tick_diff == 0) return;
 

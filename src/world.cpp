@@ -10,23 +10,28 @@ World::World() {
 }
 
 World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0) {
-    for (auto& room : m_rooms) {
-        for (auto position : room.initial_enemy_positions()) {
-            auto enemy = Enemy{ Weapon{1, 10, 50, 0, 0, bullet_system()}, position };
-            m_enemies.push_back(enemy);
-        }
-    }
+    reload_floor();
 }
 
-auto World::update(unsigned tick, Point2f player_position) -> void {
+auto World::update(unsigned tick, Point2f player_position) -> bool {
+    bool player_died = false;
+
     for (unsigned i = 0; i < m_bullet_system.bullets().size(); i++) {
         auto& bullets = m_bullet_system.bullets();
         auto& bullet = bullets.at(i);
         bullet.update(tick);
+
         if (simple_collision(bullet.position(), 10 / TILE_WIDTH, true)) {
             bullet = bullets.back();
             bullets.pop_back();
             i--;
+        }
+
+        if (bullet.person_collision(player_position)) {
+            bullet = bullets.back();
+            bullets.pop_back();
+            i--;
+            player_died = true;
         }
     }
 
@@ -41,6 +46,8 @@ auto World::update(unsigned tick, Point2f player_position) -> void {
             }
         }
     }
+
+    return player_died;
 }
 
 auto World::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void {
@@ -73,4 +80,17 @@ auto World::vector_collision(Point2f position, Point2f next_position, float widt
     else result.y = next_position.y;
 
     return result;
+}
+
+auto World::reload_floor() -> Point2f {
+
+    m_bullet_system.bullets().clear();
+    m_enemies.clear();
+
+    for (auto position : current_room()->initial_enemy_positions()) {
+        auto enemy = Enemy{ Weapon{1, 10, 50, 0, 0, bullet_system()}, position };
+        m_enemies.push_back(enemy);
+    }
+
+    return current_room()->initial_player_position();
 }

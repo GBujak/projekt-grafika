@@ -10,8 +10,11 @@ Floor::Floor(unsigned dimx, unsigned dimy)
 Floor::Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy)
     : m_matrix(vec, dimx, dimy) {}
 
-Floor::Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy, std::vector<Point2f> initial_enemy_positions)
-    : m_matrix(vec, dimx, dimy), m_initial_enemy_positions(initial_enemy_positions) {
+Floor::Floor(std::vector<Tile> vec, unsigned dimx, unsigned dimy, Point2f initial_player_position, std::vector<Point2f> initial_enemy_positions)
+    : m_matrix(vec, dimx, dimy), m_initial_player_position(initial_player_position), m_initial_enemy_positions(initial_enemy_positions) {
+        
+    m_initial_player_position.add_scalar(0.5);
+    m_initial_player_position.add_scalar(-(0.5 * PERSON_WIDTH));
     
     for (auto& position : m_initial_enemy_positions) {
         position.add_scalar(0.5);

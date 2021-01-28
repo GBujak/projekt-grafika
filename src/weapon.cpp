@@ -20,7 +20,7 @@ auto Weapon::try_shoot(Point2f position, Point2f aim_vector, unsigned tick) -> v
         velocity_vector.mul_scalar(bullet_velocity);
 
         auto vel_normalized = velocity_vector.normalized();
-        vel_normalized.mul_scalar(PERSON_WIDTH * 0.9);
+        vel_normalized.mul_scalar(PERSON_WIDTH);
         position.add_point2f(vel_normalized);
 
         auto bullet = Bullet {position, velocity_vector, tick};

@@ -36,7 +36,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
-    }, 6, 14, {{3, 0}}};
+    }, 6, 14, {1, 6}, {{3, 0}}};
 
     World world{test};
     auto test_weapon = Weapon{1, 10, 50, 0, 0, world.bullet_system()};
@@ -61,7 +61,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         renderer.update(input_state, player.position());
 
         player.update(&input_state, renderer.camera().aim_vector(), last_tick);
-        world.update(last_tick, player.position());
+        if (world.update(last_tick, player.position())) player.die();
 
         renderer.draw_world(world);
         renderer.draw_player(player);
