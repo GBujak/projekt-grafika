@@ -21,22 +21,28 @@ auto delay_at_fps(Uint32 last_tick, int fps) -> Uint32 {
 
 auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
     WorldConfig test;
-    test.floor = {{
+    test.floors = {{{
         {}, {}, {}, {}, {}, {},
-        {Tile::Type::Wall}, {}, {}, {}, {Tile::Type::Window}, {},
+        {Tile::Type::Wall, 0}, {}, {}, {}, {Tile::Type::Window, 0}, {},
         {}, {}, {}, {}, {}, {},
-        {}, {}, {}, {Tile::Type::Wall}, {}, {},
-        {Tile::Type::Wall}, {}, {}, {}, {}, {},
-        {}, {}, {}, {}, {}, {},
-        {}, {}, {}, {}, {}, {},
+        {}, {}, {}, {Tile::Type::Wall, 0}, {}, {},
+        {Tile::Type::Wall, 0}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
-        {Tile::Type::Wall}, {Tile::Type::Window}, {Tile::Type::Window}, {Tile::Type::Window}, {Tile::Type::Wall}, {},
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {}, {}, {},
+        {Tile::Type::Wall, 0}, {Tile::Type::Window, 0}, {Tile::Type::Window, 0}, {Tile::Type::Window, 0}, {Tile::Type::Wall, 0}, {},
         {}, {}, {}, {}, {}, {},
-    }, 6, 14, {1, 6}, {{3, 0}}};
+        {}, {}, {}, {}, Tile{Tile::Type::Door, 1}, {},
+        {}, {}, {}, {}, {}, {},
+    }, 6, 14, {1, 6}, {{3, 0}}},
+    {{
+        {}, {}, {}, {},
+        {Tile::Type::Wall, 0}, {Tile::Type::Wall, 0}, {}, {},
+        {}, {}, {}, {},
+        {}, {}, {}, {},
+    }, 4, 4, {1, 2}, {{0, 0}}}};
 
     World world{test};
     auto test_weapon = Weapon{1, 10, 50, 0, 0, world.bullet_system()};

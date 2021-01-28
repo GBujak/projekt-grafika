@@ -7,6 +7,5 @@
 #include <floor.hpp>
 
 struct WorldConfig {
-    Floor floor;
-    WorldConfig() : floor(0, 0) {};
+    std::vector<Floor> floors;
 };

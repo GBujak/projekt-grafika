@@ -42,7 +42,16 @@ auto Player::update(const InputState* input_state, Point2f aim_vector, Uint32 ti
 
     Point2f next_position = {m_position.x + m_speed.x, m_position.y + m_speed.y};
     
-    next_position = m_world.vector_collision(m_position, next_position, PERSON_WIDTH, false);
+    Tile* door_tile = nullptr;
+    
+    next_position = m_world.vector_collision(m_position, next_position, PERSON_WIDTH, false, &door_tile);
+    
+    if (door_tile != nullptr) {
+        if (m_world.level_cleared()) {
+            m_position = m_world.move_to_room(door_tile->leads_to());
+            return;
+        }
+    }
 
     m_position = next_position;
 

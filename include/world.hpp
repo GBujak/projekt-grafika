@@ -34,10 +34,17 @@ class World {
     
     // Czy position jest w ścianie?
     // gdy is_piercing jest ustawione na true, ignoruj kolizję z oknami
-    auto simple_collision(Point2f position, float width, bool is_piercing) -> bool;
+    auto simple_collision(Point2f position, float width, bool is_piercing, Tile** door_ptr = nullptr) -> bool;
     // Zwróć punkt pomiędzy position, a next_position taki, żeby nie był w ścianie.
-    auto vector_collision(Point2f position, Point2f next_position, float width, bool is_piercing) -> Point2f;
+    auto vector_collision(Point2f position, Point2f next_position, float width, bool is_piercing, Tile** door_ptr = nullptr) -> Point2f;
     
     // Wywoływana, gdy gracz zgninie zwraca koordynaty gracza
     auto reload_floor() -> Point2f;
+
+    auto level_cleared() -> bool { return m_enemies.size() == 0; }
+
+    auto move_to_room(int room_id) -> Point2f {
+        m_current_room++;
+        return reload_floor();
+    }
 };

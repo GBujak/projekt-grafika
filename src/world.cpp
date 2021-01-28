@@ -9,7 +9,7 @@ auto World::current_room() -> Floor* {
 World::World() {
 }
 
-World::World(WorldConfig& config) : m_rooms({config.floor}), m_current_room(0) {
+World::World(WorldConfig& config) : m_rooms(config.floors), m_current_room(0) {
     reload_floor();
 }
 
@@ -53,7 +53,7 @@ auto World::update(unsigned tick, Point2f player_position) -> bool {
 auto World::draw(SDL_Renderer* renderer, Point2f camera_pos, Point2f resolution) -> void {
 }
 
-auto World::simple_collision(Point2f position, float width, bool is_piercing) -> bool {
+auto World::simple_collision(Point2f position, float width, bool is_piercing, Tile** door_ptr) -> bool {
     auto& room = *current_room();
 
     bool crosses_x = std::floor(position.x) != std::floor(position.x + width);
@@ -63,19 +63,19 @@ auto World::simple_collision(Point2f position, float width, bool is_piercing) ->
 
     for (int x = 0; x < 1 + (int) crosses_x; x++)
         for (int y = 0; y < 1 + (int) crosses_y; y++)
-            result |= room.does_collide({position.x + x, position.y + y}, is_piercing);
+            result |= room.does_collide({position.x + x, position.y + y}, is_piercing, door_ptr);
     
     return result;
 }
 
-auto World::vector_collision(Point2f position, Point2f next_position, float width, bool is_piercing) -> Point2f {
+auto World::vector_collision(Point2f position, Point2f next_position, float width, bool is_piercing, Tile** door_ptr) -> Point2f {
     Point2f result;
     
-    if (simple_collision({next_position.x, position.y}, width, is_piercing))
+    if (simple_collision({next_position.x, position.y}, width, is_piercing, door_ptr))
         result.x = position.x;
     else result.x = next_position.x;
 
-    if (simple_collision({position.x, next_position.y}, width, is_piercing))
+    if (simple_collision({position.x, next_position.y}, width, is_piercing, door_ptr))
         result.y = position.y;
     else result.y = next_position.y;
 
