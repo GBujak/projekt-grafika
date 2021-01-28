@@ -15,3 +15,9 @@ meson builddir
 cd builddir
 meson compile
 ```
+
+# Sprawozdanie
+
+Sprawozdanie znajduje się w [folderze sprawozdanie](./sprawozdanie).
+
+- [link do pdf](./sprawozdanie/sprawozdanie.pdf)
