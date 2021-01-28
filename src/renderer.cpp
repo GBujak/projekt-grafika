@@ -35,11 +35,21 @@ auto Renderer::draw_physics_entity(PhysicsEntity& entity, SDL_Color color) -> vo
 
 auto Renderer::draw_player(Player& player) -> void {
     SDL_Color color{};
-    color.r = 200;
-    color.g = 0;
-    color.b = 0;
+    color.r = 20;
+    color.g = 20;
+    color.b = 200;
     color.a = 255;
     PhysicsEntity entity{player.position(), {}, PERSON_WIDTH};
+    draw_physics_entity(entity, color);
+}
+
+auto Renderer::draw_enemy(Enemy& enemy) -> void {
+    SDL_Color color{};
+    color.r = 200;
+    color.g = 20;
+    color.b = 20;
+    color.a = 255;
+    PhysicsEntity entity{enemy.position(), {}, PERSON_WIDTH};
     draw_physics_entity(entity, color);
 }
 

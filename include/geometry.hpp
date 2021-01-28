@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cmath>
 
 struct Point2f {
     float x, y;
@@ -23,11 +24,8 @@ struct Point2f {
     }
 
     auto normalize() -> void {
-        if (std::abs(x) > std::abs(y)) {
-            div_scalar(std::abs(x));
-        } else {
-            div_scalar(std::abs(y));
-        }
+        auto length = std::sqrt((x*x) + (y*y));
+        div_scalar(length);
     }
 
     auto mul_point2f(Point2f other) -> void {
@@ -43,6 +41,19 @@ struct Point2f {
     auto sub_point2f(Point2f other) -> void {
         x -= other.x;
         y -= other.y;
+    }
+
+    auto normalized() -> Point2f const {
+        auto other = *this;
+        other.normalize();
+        return other;
+    }
+
+    auto operator-(const Point2f& other) const {
+        auto result = Point2f{};
+        result.x = other.x - this->x;
+        result.y = other.y - this->y;
+        return result;
     }
 };
 

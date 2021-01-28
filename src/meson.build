@@ -11,4 +11,5 @@ src_files = files([
     'bullet.cpp',
     'renderer.cpp',
     'physics_entity.cpp',
+    'enemy.cpp',
 ])

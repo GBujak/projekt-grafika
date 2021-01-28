@@ -6,6 +6,7 @@
 
 #include <world.hpp>
 #include <player.hpp>
+#include <enemy.hpp>
 #include <physics_entity.hpp>
 
 class Renderer {
@@ -27,4 +28,5 @@ class Renderer {
     auto draw_floor(Floor& floor) -> void;
     auto draw_bullet(Bullet& bullet) -> void;
     auto draw_player(Player& player) -> void;
+    auto draw_enemy(Enemy& enemy) -> void;
 };
