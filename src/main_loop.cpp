@@ -23,7 +23,7 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
     WorldConfig test;
     test.floors = {{{
         {}, {}, {}, {}, {}, {},
-        {Tile::Type::Wall, 0}, {}, {}, {}, {Tile::Type::Window, 0}, {},
+        {Tile::Type::Wall, 0}, {}, {Tile::Type::Door, 1}, {}, {Tile::Type::Window, 0}, {},
         {}, {}, {}, {}, {}, {},
         {}, {}, {}, {Tile::Type::Wall, 0}, {}, {},
         {Tile::Type::Wall, 0}, {}, {}, {}, {}, {},
@@ -34,9 +34,9 @@ auto main_loop(SDL_Window* window, int fps_limit) -> std::optional<Error> {
         {}, {}, {}, {}, {}, {},
         {Tile::Type::Wall, 0}, {Tile::Type::Window, 0}, {Tile::Type::Window, 0}, {Tile::Type::Window, 0}, {Tile::Type::Wall, 0}, {},
         {}, {}, {}, {}, {}, {},
-        {}, {}, {}, {}, Tile{Tile::Type::Door, 1}, {},
         {}, {}, {}, {}, {}, {},
-    }, 6, 14, {1, 6}, {{3, 0}}},
+        {}, {}, {}, {}, {}, {},
+    }, 6, 14, {1, 6}, {{1, 12}, {2, 12}}},
     {{
         {}, {}, {}, {},
         {Tile::Type::Wall, 0}, {Tile::Type::Wall, 0}, {}, {},
